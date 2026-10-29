@@ -1,0 +1,5 @@
+warehouse_key,warehouse_id,warehouse_name,city,region
+1,WH-DEL,Delhi DC,Delhi,North
+2,WH-MUM,Mumbai DC,Mumbai,West
+3,WH-BLR,Bengaluru DC,Bengaluru,South
+4,WH-KOL,Kolkata DC,Kolkata,East

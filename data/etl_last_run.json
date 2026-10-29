@@ -1,0 +1,83 @@
+{
+  "started_at": "2026-10-29T15:44:32+00:00",
+  "duration_sec": 2.24,
+  "rows_loaded": {
+    "dim_date": 571,
+    "dim_supplier": 12,
+    "dim_warehouse": 4,
+    "dim_product": 40,
+    "fact_sales": 86400,
+    "fact_inventory": 86400,
+    "fact_purchase_orders": 4109
+  },
+  "rejected_rows": {
+    "purchase_orders": 6
+  },
+  "table_stats": {
+    "fact_sales": {
+      "source_rows": 86440,
+      "duplicates_removed": 40,
+      "rejected": 0,
+      "rows": 86400
+    },
+    "fact_inventory": {
+      "source_rows": 86400,
+      "duplicates_removed": 0,
+      "rejected": 0,
+      "rows": 86400
+    },
+    "fact_purchase_orders": {
+      "source_rows": 4140,
+      "duplicates_removed": 25,
+      "rejected": 6,
+      "rows": 4109
+    },
+    "dim_date": {
+      "rows": 571
+    },
+    "dim_supplier": {
+      "rows": 12
+    },
+    "dim_warehouse": {
+      "rows": 4
+    },
+    "dim_product": {
+      "rows": 40
+    }
+  },
+  "quality_checks": [
+    {
+      "check": "fact_sales has rows",
+      "passed": true
+    },
+    {
+      "check": "no sold > demanded",
+      "passed": true
+    },
+    {
+      "check": "no negative stock",
+      "passed": true
+    },
+    {
+      "check": "received POs have lead time",
+      "passed": true
+    },
+    {
+      "check": "open POs not received",
+      "passed": true
+    },
+    {
+      "check": "every product has a supplier",
+      "passed": true
+    },
+    {
+      "check": "inventory covers latest date",
+      "passed": true
+    },
+    {
+      "check": "unique sales grain",
+      "passed": true
+    }
+  ],
+  "status": "success"
+}

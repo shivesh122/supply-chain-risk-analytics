@@ -1,0 +1,139 @@
+// =====================================================================
+// Supply Chain Risk Analytics - DAX measures
+// Create a blank table named _Measures and paste each measure into it.
+// Table names match the star schema (exports/*.csv or SQL Server views).
+// =====================================================================
+
+// ---------- Service level ----------
+Units Demanded = SUM ( fact_sales[units_demanded] )
+Units Sold = SUM ( fact_sales[units_sold] )
+Lost Units = SUM ( fact_sales[lost_units] )
+
+Fill Rate % =
+DIVIDE ( [Units Sold], [Units Demanded] )
+
+Revenue = SUM ( fact_sales[revenue] )
+Lost Revenue = SUM ( fact_sales[lost_revenue] )
+
+Fill Rate % (Prev 30d) =
+VAR LastDate = MAX ( dim_date[full_date] )
+RETURN
+    CALCULATE (
+        [Fill Rate %],
+        DATESINPERIOD ( dim_date[full_date], LastDate - 30, -30, DAY )
+    )
+
+Fill Rate % (Last 30d) =
+VAR LastDate = MAX ( dim_date[full_date] )
+RETURN
+    CALCULATE ( [Fill Rate %], DATESINPERIOD ( dim_date[full_date], LastDate, -30, DAY ) )
+
+Fill Rate Δ vs Prior 30d =
+[Fill Rate % (Last 30d)] - [Fill Rate % (Prev 30d)]
+
+Stockout Days =
+CALCULATE (
+    COUNTROWS ( fact_sales ),
+    fact_sales[lost_units] > 0
+)
+
+// ---------- Supplier performance ----------
+PO Count = COUNTROWS ( fact_purchase_orders )
+
+Received POs =
+CALCULATE ( [PO Count], fact_purchase_orders[status] = "Received" )
+
+On-Time % =
+CALCULATE (
+    AVERAGE ( fact_purchase_orders[is_on_time] ),
+    fact_purchase_orders[status] = "Received"
+)
+
+OTIF % =
+CALCULATE (
+    AVERAGE ( fact_purchase_orders[is_otif] ),
+    fact_purchase_orders[status] = "Received"
+)
+
+Supplier Fill Rate % =
+DIVIDE (
+    SUM ( fact_purchase_orders[qty_received] ),
+    CALCULATE ( SUM ( fact_purchase_orders[qty_ordered] ), fact_purchase_orders[status] = "Received" )
+)
+
+Defect Rate % =
+DIVIDE ( SUM ( fact_purchase_orders[qty_defective] ), SUM ( fact_purchase_orders[qty_received] ) )
+
+Avg Lead Time (days) =
+CALCULATE ( AVERAGE ( fact_purchase_orders[lead_time_days] ), fact_purchase_orders[status] = "Received" )
+
+Lead Time Std Dev =
+CALCULATE ( STDEV.S ( fact_purchase_orders[lead_time_days] ), fact_purchase_orders[status] = "Received" )
+
+Avg Delay When Late (days) =
+CALCULATE ( AVERAGE ( fact_purchase_orders[delay_days] ), fact_purchase_orders[delay_days] > 0 )
+
+Spend = SUM ( fact_purchase_orders[order_value] )
+
+Supplier Score =
+VAR Otif = [OTIF %] * 100
+VAR Fill = [Supplier Fill Rate %] * 100
+VAR Quality = MAX ( 0, 100 - [Defect Rate %] * 1000 )
+VAR Reliability = MAX ( 0, 100 - DIVIDE ( [Lead Time Std Dev], [Avg Lead Time (days)] ) * 100 )
+RETURN 0.4 * Otif + 0.2 * Fill + 0.2 * Quality + 0.2 * Reliability
+
+Supplier Tier =
+SWITCH ( TRUE (),
+    [Supplier Score] >= 85, "Preferred",
+    [Supplier Score] >= 72, "Watch",
+    "At Risk"
+)
+
+Open PO Value =
+CALCULATE ( [Spend], fact_purchase_orders[status] = "Open" )
+
+Overdue Open POs =
+VAR Today = MAX ( fact_sales[date_key] )
+RETURN
+    CALCULATE (
+        [PO Count],
+        fact_purchase_orders[status] = "Open",
+        fact_purchase_orders[promised_date_key] < Today
+    )
+
+// ---------- Inventory ----------
+// Snapshot measures: use the last date in the current filter context, never sum across days
+On Hand (Latest) =
+VAR LastKey = CALCULATE ( MAX ( fact_inventory[date_key] ), ALLSELECTED ( dim_date ) )
+RETURN CALCULATE ( SUM ( fact_inventory[on_hand_units] ), fact_inventory[date_key] = LastKey )
+
+Inventory Value (Latest) =
+VAR LastKey = CALCULATE ( MAX ( fact_inventory[date_key] ), ALLSELECTED ( dim_date ) )
+RETURN CALCULATE ( SUM ( fact_inventory[inventory_value] ), fact_inventory[date_key] = LastKey )
+
+Avg Daily Demand (28d) =
+VAR LastDate = CALCULATE ( MAX ( dim_date[full_date] ), ALLSELECTED ( dim_date ) )
+RETURN
+    DIVIDE (
+        CALCULATE ( [Units Demanded], DATESINPERIOD ( dim_date[full_date], LastDate, -28, DAY ) ),
+        28
+    )
+
+Days of Cover =
+DIVIDE ( [On Hand (Latest)], [Avg Daily Demand (28d)] )
+
+Out-of-Stock Locations =
+VAR LastKey = CALCULATE ( MAX ( fact_inventory[date_key] ), ALLSELECTED ( dim_date ) )
+RETURN
+    CALCULATE (
+        COUNTROWS ( fact_inventory ),
+        fact_inventory[date_key] = LastKey,
+        fact_inventory[on_hand_units] = 0
+    )
+
+// ---------- Formatting helpers ----------
+Fill Rate Colour =
+SWITCH ( TRUE (), [Fill Rate %] >= 0.95, "#10b981", [Fill Rate %] >= 0.85, "#f59e0b", "#ef4444" )
+
+OTIF Colour =
+SWITCH ( TRUE (), [OTIF %] >= 0.85, "#10b981", [OTIF %] >= 0.7, "#f59e0b", "#ef4444" )

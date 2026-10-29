@@ -1,0 +1,13 @@
+supplier_key,supplier_id,supplier_name,country,region,contract_lead_time_days
+1,SUP-01,Apex Components,India,Domestic,7
+2,SUP-02,Bharat Packaging Co,India,Domestic,5
+3,SUP-03,Shenzhen Tech Supply,China,Asia,21
+4,SUP-04,Ganga Pharma Distributors,India,Domestic,6
+5,SUP-05,Mekong Textiles,Vietnam,Asia,18
+6,SUP-06,Rhine Industrial GmbH,Germany,Europe,30
+7,SUP-07,Deccan Foods Pvt Ltd,India,Domestic,4
+8,SUP-08,Pacific Electronics,Taiwan,Asia,20
+9,SUP-09,Coastal Logistics Supply,India,Domestic,8
+10,SUP-10,Lombard Medical,Italy,Europe,28
+11,SUP-11,Thar Chemicals,India,Domestic,9
+12,SUP-12,Golden Bay Apparel,Bangladesh,Asia,16

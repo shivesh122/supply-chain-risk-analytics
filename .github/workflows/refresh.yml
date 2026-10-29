@@ -1,0 +1,33 @@
+# Daily automated ETL: regenerate the day's data, run the pipeline + tests, and commit the refreshed
+# exports and dashboard data. The commit triggers Render to redeploy the live dashboard.
+name: Daily data refresh
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 06:00 IST every day
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -t .
+      - name: Run pipeline (generate -> ETL -> analytics)
+        run: python build_dashboard.py --refresh
+      - name: Commit refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exports site/data data/etl_last_run.json
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: daily data refresh $(date -u +%Y-%m-%d)"
+          git push

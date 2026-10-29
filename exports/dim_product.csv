@@ -1,0 +1,41 @@
+product_key,product_id,sku,product_name,category,unit_cost,unit_price,criticality,primary_supplier_key
+1,P001,ELE-0001,Wireless Earbuds,Electronics,16189.74,25321.16,C,3
+2,P002,ELE-0002,Smart Watch,Electronics,8553.91,13307.69,A,8
+3,P003,ELE-0003,Power Bank 20k,Electronics,20231.13,28602.31,B,1
+4,P004,ELE-0004,USB-C Charger,Electronics,7489.44,10528.48,B,3
+5,P005,ELE-0005,Bluetooth Speaker,Electronics,24894.26,38024.28,B,8
+6,P006,ELE-0006,LED Monitor 24in,Electronics,6559.75,8567.52,B,1
+7,P007,ELE-0007,Wi-Fi Router,Electronics,2338.49,3344.53,B,3
+8,P008,ELE-0008,Keyboard Combo,Electronics,16286.82,23289.19,B,8
+9,P009,FMC-0009,Basmati Rice 5kg,FMCG,46.6,61.39,B,9
+10,P010,FMC-0010,Sunflower Oil 1L,FMCG,246.94,309.0,C,7
+11,P011,FMC-0011,Masala Tea 500g,FMCG,189.86,295.82,B,2
+12,P012,FMC-0012,Detergent 2kg,FMCG,398.24,601.19,A,9
+13,P013,FMC-0013,Toothpaste Pack,FMCG,324.35,504.35,B,7
+14,P014,FMC-0014,Instant Noodles 12pk,FMCG,73.18,101.4,B,2
+15,P015,FMC-0015,Biscuits Family Pack,FMCG,497.15,687.46,C,9
+16,P016,FMC-0016,Hand Wash 750ml,FMCG,378.83,558.13,B,7
+17,P017,PHA-0017,Paracetamol 500mg,Pharma,1145.56,1528.0,B,4
+18,P018,PHA-0018,Vitamin D3 Tabs,Pharma,2422.14,3209.94,B,10
+19,P019,PHA-0019,ORS Sachets,Pharma,2195.27,3252.9,A,4
+20,P020,PHA-0020,Antiseptic Liquid,Pharma,2366.77,3707.24,B,10
+21,P021,PHA-0021,Digital Thermometer,Pharma,545.76,859.44,B,4
+22,P022,PHA-0022,Cough Syrup 100ml,Pharma,2219.42,3272.65,B,10
+23,P023,PHA-0023,Insulin Pen Needles,Pharma,1074.51,1433.2,A,4
+24,P024,PHA-0024,N95 Masks 10pk,Pharma,1211.91,1747.18,B,10
+25,P025,APP-0025,Cotton T-Shirt,Apparel,380.63,525.37,A,5
+26,P026,APP-0026,Denim Jeans,Apparel,3394.87,5025.14,B,12
+27,P027,APP-0027,Sports Shoes,Apparel,3092.99,4238.86,B,5
+28,P028,APP-0028,Winter Jacket,Apparel,1437.32,2057.79,C,12
+29,P029,APP-0029,Kurta Set,Apparel,783.4,1235.18,A,5
+30,P030,APP-0030,Rain Jacket,Apparel,2893.69,3755.63,B,12
+31,P031,APP-0031,Formal Shirt,Apparel,345.67,508.12,C,5
+32,P032,APP-0032,Track Pants,Apparel,2622.72,3486.25,A,12
+33,P033,IND-0033,Safety Helmet,Industrial,2563.17,3514.42,C,1
+34,P034,IND-0034,Hydraulic Pump,Industrial,4410.78,5932.65,C,6
+35,P035,IND-0035,Ball Bearings Set,Industrial,11774.54,16842.69,B,11
+36,P036,IND-0036,Welding Rods 5kg,Industrial,9041.83,13139.85,B,1
+37,P037,IND-0037,Pipe Fittings Kit,Industrial,5233.93,8232.79,A,6
+38,P038,IND-0038,Industrial Gloves,Industrial,6474.42,10247.9,B,11
+39,P039,IND-0039,Drill Machine,Industrial,8279.42,12427.24,B,1
+40,P040,IND-0040,Cable Roll 90m,Industrial,4325.84,6010.31,A,6

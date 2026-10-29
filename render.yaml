@@ -1,0 +1,14 @@
+# Render Blueprint: a static site whose build runs the full Python pipeline
+services:
+  - type: web
+    name: supply-chain-risk-analytics
+    runtime: static
+    buildCommand: pip install -r requirements.txt && python build_dashboard.py --refresh
+    staticPublishPath: site
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+    headers:
+      - path: /data/*
+        name: Cache-Control
+        value: no-cache
