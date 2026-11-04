@@ -1,5 +1,4 @@
 date_key,full_date,year,quarter,month,month_name,year_month,week_of_year,day_of_week,is_weekend
-20250513,2025-05-13,2025,2,5,May,2025-05,20,Tue,0
 20250514,2025-05-14,2025,2,5,May,2025-05,20,Wed,0
 20250515,2025-05-15,2025,2,5,May,2025-05,20,Thu,0
 20250516,2025-05-16,2025,2,5,May,2025-05,20,Fri,0
@@ -572,3 +571,4 @@ date_key,full_date,year,quarter,month,month_name,year_month,week_of_year,day_of_
 20261204,2026-12-04,2026,4,12,Dec,2026-12,49,Fri,0
 20261205,2026-12-05,2026,4,12,Dec,2026-12,49,Sat,1
 20261206,2026-12-06,2026,4,12,Dec,2026-12,49,Sun,1
+20261207,2026-12-07,2026,4,12,Dec,2026-12,50,Mon,0
