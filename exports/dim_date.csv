@@ -1,5 +1,4 @@
 date_key,full_date,year,quarter,month,month_name,year_month,week_of_year,day_of_week,is_weekend
-20250514,2025-05-14,2025,2,5,May,2025-05,20,Wed,0
 20250515,2025-05-15,2025,2,5,May,2025-05,20,Thu,0
 20250516,2025-05-16,2025,2,5,May,2025-05,20,Fri,0
 20250517,2025-05-17,2025,2,5,May,2025-05,20,Sat,1
