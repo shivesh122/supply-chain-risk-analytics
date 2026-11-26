@@ -1,14 +1,14 @@
 {
-  "started_at": "2026-11-25T09:00:09+00:00",
-  "duration_sec": 1.67,
+  "started_at": "2026-11-26T08:47:19+00:00",
+  "duration_sec": 1.31,
   "rows_loaded": {
-    "dim_date": 571,
+    "dim_date": 574,
     "dim_supplier": 12,
     "dim_warehouse": 4,
     "dim_product": 40,
     "fact_sales": 86400,
     "fact_inventory": 86400,
-    "fact_purchase_orders": 4247
+    "fact_purchase_orders": 4120
   },
   "rejected_rows": {
     "purchase_orders": 6
@@ -27,13 +27,13 @@
       "rows": 86400
     },
     "fact_purchase_orders": {
-      "source_rows": 4278,
+      "source_rows": 4151,
       "duplicates_removed": 25,
       "rejected": 6,
-      "rows": 4247
+      "rows": 4120
     },
     "dim_date": {
-      "rows": 571
+      "rows": 574
     },
     "dim_supplier": {
       "rows": 12
